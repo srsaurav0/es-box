@@ -27,3 +27,11 @@
    ```
    docker compose up --build
    ```
+   This command initializes the app in **localhost:8080**
+
+
+## App Usage
+
+- Go to ***[localhost:5601](http://localhost:5601/app/home#/tutorial_directory/sampleData)*** and add **Sample eCommerce orders**
+
+- Go to **localhost:8080** and search for products in the search bar.
