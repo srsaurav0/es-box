@@ -34,4 +34,4 @@
 
 - Go to ***[localhost:5601](http://localhost:5601/app/home#/tutorial_directory/sampleData)*** and add **Sample eCommerce orders**
 
-- Go to **localhost:8080** and search for products in the search bar.
+- Go to ***[localhost:8080](http://localhost:8080/)*** and search for products in the search bar. Click on a product to get the price.
