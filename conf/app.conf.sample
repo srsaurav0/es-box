@@ -1,3 +1,5 @@
 appname = es-box
 httpport = 8080
 runmode = dev
+ES_LOCAL_API_KEY=XXXX
+ES_LOCAL_URL=http://localhost:9200

@@ -1,0 +1,52 @@
+
+services:
+  # Elasticsearch service
+  elasticsearch:
+    image: elasticsearch:8.17.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      retries: 5
+
+  # Kibana service
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - KIBANA_ENCRYPTION_KEY=VKLC5lSbqSCaqAtpAfhN8oGX4SeHIVni
+      - XPACK_SECURITY_ENABLED=false
+    ports:
+      - "5601:5601"
+    networks:
+      - app-network
+
+  # Go app service running 'bee run'
+  go-app:
+    build: .
+    ports:
+      - "8080:8080"  # Expose Go app port
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container
+    working_dir: /app  # Set the working directory inside the container
+    networks:
+      - app-network
+    # depends_on:
+    #   - elasticsearch
+    #   - kibana
+
+volumes:
+  elasticsearch-data:
+
+networks:
+  app-network:
+    driver: bridge
